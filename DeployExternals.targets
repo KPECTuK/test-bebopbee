@@ -1,0 +1,25 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+	<ItemGroup>
+		<Sources Include="$(ProjectDir)$(OutputPath)*.dll;$(ProjectDir)$(OutputPath)*.pdb">
+			<InProject>false</InProject>
+		</Sources>
+	</ItemGroup>
+	<Target Name="DeployExternals">
+		<CallTarget Targets="GenerateSymbols" />
+		<CallTarget Targets="CopySource" />
+	</Target>
+	<Target Name="GenerateSymbols">
+		<CallTarget Targets="GenerateMonoSymbols" Condition="Exists('$(OutputPath)$(AssemblyName).pdb')" />
+		<Message Text="$(AssemblyName): PDB -> MDB conversion done." Condition="Exists('$(OutputPath)$(AssemblyName).dll.mdb')" Importance="High" />
+		<Message Text="$(AssemblyName): PDB -> MDB conversion error." Condition="!Exists('$(OutputPath)$(AssemblyName).dll.mdb')" Importance="High" />
+	</Target>
+	<Target Name="GenerateMonoSymbols">
+		<Exec Command="&quot;$(MonoCLI)&quot; &quot;$(MonoMdbGenerator)&quot; $(AssemblyName).dll" WorkingDirectory="$(MSBuildProjectDirectory)\$(OutputPath)" />
+	</Target>
+	<Target Name="CopySource">
+		<Exec Command="del /f /q /s $(AssetsExternals)*.*" Condition="Exists('$(AssetsExternals)')"/>
+		<Copy SourceFiles="@(Sources)" DestinationFiles="@(Sources->'$(AssetsExternals)%(RecursiveDir)%(Filename)%(Extension)')" Condition="Exists('$(SolutionUnityFolder)')" />
+		<Message Text="$(AssemblyName): copy to $(AssetsExternals) done.." Condition="Exists('$(SolutionUnityFolder)')" Importance="High" />
+		<Message Text="$(AssemblyName): copy to $(AssetsExternals) error.." Condition="!Exists('$(SolutionUnityFolder)')" Importance="High" />
+	</Target>
+</Project>

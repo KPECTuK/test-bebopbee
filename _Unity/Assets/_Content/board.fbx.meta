@@ -1,0 +1,179 @@
+fileFormatVersion: 2
+guid: e529dd68130b47645913dd615f3b2216
+timeCreated: 1483304869
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: board
+    100004: piece_00
+    100006: piece_01
+    100008: piece_02
+    100010: piece_03
+    100012: piece_04
+    100014: piece_05
+    100016: piece_06
+    100018: piece_07
+    100020: piece_08
+    100022: pieces
+    100024: selector_00
+    100026: selector_01
+    100028: selector_02
+    100030: selector_03
+    100032: selector_04
+    100034: selector_05
+    100036: selector_06
+    100038: selector_07
+    100040: selector_08
+    100042: selectors
+    100044: selector
+    400000: //RootNode
+    400002: board
+    400004: piece_00
+    400006: piece_01
+    400008: piece_02
+    400010: piece_03
+    400012: piece_04
+    400014: piece_05
+    400016: piece_06
+    400018: piece_07
+    400020: piece_08
+    400022: pieces
+    400024: selector_00
+    400026: selector_01
+    400028: selector_02
+    400030: selector_03
+    400032: selector_04
+    400034: selector_05
+    400036: selector_06
+    400038: selector_07
+    400040: selector_08
+    400042: selectors
+    400044: selector
+    2300000: board
+    2300002: piece_00
+    2300004: piece_01
+    2300006: piece_02
+    2300008: piece_03
+    2300010: piece_04
+    2300012: piece_05
+    2300014: piece_06
+    2300016: piece_07
+    2300018: piece_08
+    2300020: selector_00
+    2300022: selector_01
+    2300024: selector_02
+    2300026: selector_03
+    2300028: selector_04
+    2300030: selector_05
+    2300032: selector_06
+    2300034: selector_07
+    2300036: selector_08
+    2300038: selector
+    3300000: board
+    3300002: piece_00
+    3300004: piece_01
+    3300006: piece_02
+    3300008: piece_03
+    3300010: piece_04
+    3300012: piece_05
+    3300014: piece_06
+    3300016: piece_07
+    3300018: piece_08
+    3300020: selector_00
+    3300022: selector_01
+    3300024: selector_02
+    3300026: selector_03
+    3300028: selector_04
+    3300030: selector_05
+    3300032: selector_06
+    3300034: selector_07
+    3300036: selector_08
+    3300038: selector
+    4300000: board
+    4300002: selector_00
+    4300004: selector_01
+    4300006: selector_02
+    4300008: selector_03
+    4300010: selector_04
+    4300012: selector_05
+    4300014: selector_06
+    4300016: selector_07
+    4300018: selector_08
+    4300020: piece_00
+    4300022: piece_01
+    4300024: piece_02
+    4300026: piece_03
+    4300028: piece_04
+    4300030: piece_05
+    4300032: piece_06
+    4300034: piece_07
+    4300036: piece_08
+    4300038: selector
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 1
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 0
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

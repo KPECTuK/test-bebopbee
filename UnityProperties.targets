@@ -1,0 +1,16 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+	<PropertyGroup>
+		<UnityInstallFolder>$(registry:HKEY_CURRENT_USER\Software\Unity Technologies\Installer\Unity@Location x64)</UnityInstallFolder>
+		<UnityInstallVersion>$(registry:HKEY_CURRENT_USER\Software\Unity Technologies\Installer\Unity@Version)</UnityInstallVersion>
+		<ReferencePath>$(UnityInstallFolder)\Editor\Data\</ReferencePath>
+		<MonoFolder>C:\Program Files (x86)\Mono\</MonoFolder>
+		<MonoFolderBleedingEdge>($UnityInstallFolder)\Editor\Data\MonoBleedidngEdge\</MonoFolderBleedingEdge>
+		<MonoMdbGenerator>$(MonoFolder)lib\mono\4.5\pdb2mdb.exe</MonoMdbGenerator>
+		<MonoCLI>$(MonoFolder)bin\cli.bat</MonoCLI>
+		<UnityManagedFolder>$(UnityInstallFolder)\Editor\Data\Managed\</UnityManagedFolder>
+		<UnityExtensionsFolder>$(UnityInstallFolder)\Editor\Data\UnityExtensions\Unity\</UnityExtensionsFolder>
+		<AssetsExternals>$(SolutionDir)_Unity\Assets\Externals\</AssetsExternals>
+		<AssetsExternalsEditor>$(AssetsExternals)Editor\</AssetsExternalsEditor>
+		<SolutionUnityFolder>$(SolutionDir)_Unity\</SolutionUnityFolder>
+	</PropertyGroup>
+</Project>
