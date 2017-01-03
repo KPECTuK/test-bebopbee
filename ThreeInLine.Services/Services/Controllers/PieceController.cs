@@ -1,29 +1,38 @@
-﻿using ThreeInLine.Services.FSM;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace ThreeInLine.Services.Controllers
 {
-	public abstract class PieceController : MonoBehaviourExtended, IPieceController, IState
+	public abstract class PieceController : MonoBehaviourExtended, IPieceController
 	{
-		[SerializeField]
-		private int _index;
+		[SerializeField] private int _index;
 		public int Index { get { return _index; } protected set { _index = value; } }
 
 		public Vector3 Position => Transform.position;
 
-		public bool Rising()
+		private Material _material;
+		private int _sizeHandle;
+		private int _stateHandle;
+
+		protected override void OnAwoke()
 		{
-			throw new System.NotImplementedException();
+			base.OnAwoke();
+
+			_material = Renderer.material; // copy
+			_sizeHandle = Shader.PropertyToID("_Size");
+			_stateHandle = Shader.PropertyToID("_State");
+			//
+			_material.SetFloat(_stateHandle, 0f);
+			_material.SetFloat(_sizeHandle, 0f);
 		}
 
-		public bool Idle()
+		void IPieceController.SetState(int player)
 		{
-			throw new System.NotImplementedException();
+			_material.SetFloat(_stateHandle, Mathf.Clamp(player, -.5f, .5f));
 		}
 
-		public bool Fading()
+		void IPieceController.SetSize(float normalized)
 		{
-			throw new System.NotImplementedException();
+			_material.SetFloat(_sizeHandle, Mathf.Clamp01(normalized));
 		}
 	}
 }

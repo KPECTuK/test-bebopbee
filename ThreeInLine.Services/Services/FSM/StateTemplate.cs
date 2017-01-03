@@ -11,6 +11,7 @@ namespace ThreeInLine.Services.FSM
 			Container = container;
 		}
 
+		public abstract void ResetState();
 		public abstract bool Rising();
 		public abstract bool Idle();
 		public abstract bool Fading();

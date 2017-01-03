@@ -6,19 +6,9 @@ namespace ThreeInLine.Services.FSM.Implementation
 	{
 		public SecondPlayerTurnWait(IContainer container) : base(container) { }
 
-		public override bool Rising()
-		{
-			return false;
-		}
+		private TurnPerformBase _performing;
 
-		public override bool Idle()
-		{
-			return false;
-		}
-
-		public override bool Fading()
-		{
-			return false;
-		}
+		protected override int PlayerIndex => -1;
+		protected override TurnPerformBase PerformingState => _performing ?? (_performing = Container.Resolve<SecondPlayerTurnPerform>());
 	}
 }

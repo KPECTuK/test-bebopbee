@@ -138,7 +138,11 @@ Material:
       data:
         first:
           name: _State
-        second: 0
+        second: 0.467
+      data:
+        first:
+          name: _Size
+        second: 1
     m_Colors:
       data:
         first:

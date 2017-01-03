@@ -69,10 +69,10 @@
     <Compile Include="Services\Logging\ILog.cs" />
     <Compile Include="Services\Container\IProvider.cs" />
     <Compile Include="Services\Logging\Level.cs" />
-    <Compile Include="Services\Repository\Board.cs" />
-    <Compile Include="Services\Repository\IBoard.cs" />
-    <Compile Include="Services\Repository\ILine.cs" />
-    <Compile Include="Services\Repository\IntVector.cs" />
+    <Compile Include="Services\Logic\Board.cs" />
+    <Compile Include="Services\Logic\IBoard.cs" />
+    <Compile Include="Services\Logic\ILine.cs" />
+    <Compile Include="Services\Logic\IntVector.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

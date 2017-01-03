@@ -9,35 +9,76 @@ namespace ThreeInLine.Services.Interaction
 	internal class Focusing : IFocusing
 	{
 		private const int SCAN_DEEPNESS_I = 3;
+		private const float DOUBLECLICK_INTERVAL_F = .7f;
+		private const float DRAGSTOP_INTERVAL_F = 1f;
 
 		private readonly IContainer _container;
 		private readonly RaycastHit[] _hits = new RaycastHit[SCAN_DEEPNESS_I];
-		private IPieceController _inFocus;
+		private int _clicksOverTheSame;
+		private float _lastClickTime;
+		private float _lastDragTime;
+		private bool _isDragInProgress;
 
-		public int InFocusIndex => _inFocus?.Index ?? -1;
-		public IPieceController InFocus => _inFocus;
+		public int InFocusIndex => InFocus?.Index ?? -1;
+		public IPieceController InFocus { get; private set; }
+		public IPieceController SwipedTo { get; private set; }
+		public bool WasDoubleClick { get; private set; }
+		public bool WasSwipe { get; private set; }
 
 		public Focusing(IContainer container)
 		{
 			_container = container;
 		}
-		
-		public void Scan(Ray ray, bool isIntent)
+
+		public void MaintainSwipe(Ray ray, bool isAction)
 		{
-			if(!isIntent)
+			_isDragInProgress = isAction && _lastClickTime < DRAGSTOP_INTERVAL_F;
+			_lastDragTime = isAction ? Time.realtimeSinceStartup : _lastDragTime;
+
+			if(ReferenceEquals(InFocus, null) || !isAction)
 				return;
 
-			var last = _inFocus;
-			_inFocus = null;
+			var swipedTo = SwipedTo;
+			SwipedTo = null;
 
 			Physics.RaycastNonAlloc(ray, _hits);
-			Array.ForEach(_hits, _ => _inFocus = _inFocus ?? _.transform?.GetComponent<IPieceController>());
+			Array.ForEach(_hits, _ => SwipedTo = SwipedTo ?? _.transform?.GetComponent<IPieceController>());
 
-			if(!ReferenceEquals(last, _inFocus))
-			{
-				// onFocus Change
-				Container.Container.CompositionRoot.Resolve<ILog>().Log(GetType(), Level.Debug, $"selection changed to: {_inFocus?.Index ?? -1} with ray: {ray}");
-			}
+			WasSwipe =
+				!ReferenceEquals(SwipedTo, swipedTo) &&
+				!ReferenceEquals(InFocus, SwipedTo);
+
+			if(WasSwipe)
+				this.Log(Level.Debug, $"WAS SWIPE TO: {SwipedTo?.Index ?? -1}");
+		}
+
+		public void MaintainClick(Ray ray, bool isAction)
+		{
+			WasDoubleClick = false;
+			if(!isAction || _isDragInProgress)
+				return;
+
+			var last = InFocus;
+			InFocus = null;
+
+			Physics.RaycastNonAlloc(ray, _hits);
+			Array.ForEach(_hits, _ => InFocus = InFocus ?? _.transform?.GetComponent<IPieceController>());
+
+			if(!ReferenceEquals(last, InFocus))
+				this.Log(Level.Notice, $"SELECTION CHANGED TO: {InFocus?.Index ?? -1}");
+
+			_clicksOverTheSame =
+				!ReferenceEquals(last, null) &&
+				ReferenceEquals(last, InFocus) &&
+				Time.realtimeSinceStartup - _lastClickTime < DOUBLECLICK_INTERVAL_F
+					? _clicksOverTheSame + 1
+					: 0;
+			WasDoubleClick = _clicksOverTheSame > 1;
+			_clicksOverTheSame = _clicksOverTheSame > 1 ? 0 : _clicksOverTheSame;
+			_lastClickTime = Time.realtimeSinceStartup;
+
+			if(WasDoubleClick)
+				this.Log(Level.Debug, $"DOUBLE CLICK OVER: {InFocus?.Index ?? -1}");
 		}
 	}
 }

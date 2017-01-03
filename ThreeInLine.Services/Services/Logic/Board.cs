@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using ThreeInLine.Services.Container;
 
-namespace ThreeInLine.Services.Repository
+namespace ThreeInLine.Services.Logic
 {
 	internal class Board : IBoard
 	{
@@ -43,6 +46,27 @@ namespace ThreeInLine.Services.Repository
 					sum += _board._cells[_indices[index]];
 				return sum == _indices.Length || sum == -_indices.Length;
 			}
+
+			public bool IsNeighbors(int index1, int index2)
+			{
+				if(index1 == -1 || index2 == -1)
+					return true;
+				var counter = -1;
+				while(++counter < _indices.Length - 1)
+					if((_indices[counter] == index1 && _indices[counter + 1] == index2) || (_indices[counter] == index2 && _indices[counter + 1] == index1))
+						return true;
+				return false;
+			}
+
+			public IEnumerator<int> GetEnumerator()
+			{
+				return _indices.Cast<int>().GetEnumerator();
+			}
+
+			IEnumerator IEnumerable.GetEnumerator()
+			{
+				return GetEnumerator();
+			}
 		}
 
 		public Board(IContainer container)
@@ -62,20 +86,23 @@ namespace ThreeInLine.Services.Repository
 			_lines[7] = new Line(this, new[] { new IntVector(2, 0).ToOffset(), new IntVector(1, 1).ToOffset(), new IntVector(0, 2).ToOffset() });
 		}
 
-		public bool Turn(int player, IntVector from, IntVector to)
+		public bool Turn(int player, int from, int to)
 		{
-			// check board cell if available
-			if(!to.IsValid() || _cells[to.ToOffset()] != 0)
+			// check if board target cell is available
+			if(!new IntVector(to).IsValid() || _cells[to] != 0)
+				return false;
+			// check if cells are neighbors
+			if(_lines.All(_ => !_.IsNeighbors(from, to)))
 				return false;
 			// remove piece from the board, a bag or exit without turn if there is no piece reachable for the player
-			if(@from.IsValid() && _cells[@from.ToOffset()] == player)
-				_cells[@from.ToOffset()] = 0;
-			else if(_unusedPieces > 0)
+			if(new IntVector(from).IsValid() && _cells[from] == player)
+				_cells[from] = 0;
+			else if(!new IntVector(from).IsValid() && _unusedPieces > 0)
 				_unusedPieces -= 1;
 			else
 				return false;
 			// set piece to the board
-			_cells[to.ToOffset()] = player;
+			_cells[to] = player;
 			return true;
 		}
 

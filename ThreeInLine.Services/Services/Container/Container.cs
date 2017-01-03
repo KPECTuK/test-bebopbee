@@ -4,8 +4,7 @@ using System.Reflection;
 using ThreeInLine.Services.FSM;
 using ThreeInLine.Services.FSM.Implementation;
 using ThreeInLine.Services.Interaction;
-using ThreeInLine.Services.Logging;
-using ThreeInLine.Services.Repository;
+using ThreeInLine.Services.Logic;
 
 namespace ThreeInLine.Services.Container
 {
@@ -20,6 +19,7 @@ namespace ThreeInLine.Services.Container
 
 		private Container()
 		{
+			//! avoid circular dependaces (ctor.s chaining): Resolve<ILog>() in ctor. for example
 			// ReSharper disable once UseObjectOrCollectionInitializer
 			_singletons = new ListDictionary(); // because of settings call from ctor.s
 			_singletons.Add(typeof(IBoard), new Board(this));
@@ -38,11 +38,11 @@ namespace ThreeInLine.Services.Container
 		/// <summary>
 		/// [Depreciated] Use with caution, because it makes non-obvious context. 
 		/// </summary>
-		public void RegisterInstance(object instance) 
+		public void RegisterInstance(object instance)
 		{
 			// instances are initializing externally and have no container events responders
 			var type = instance.GetType();
-			if (_singletons.Contains(type))
+			if(_singletons.Contains(type))
 				throw new ArgumentException("registered already");
 			_singletons.Add(type, instance);
 		}
@@ -50,11 +50,11 @@ namespace ThreeInLine.Services.Container
 		/// <summary>
 		/// [Depreciated] Use with caution, because it makes non-obvious context. 
 		/// </summary>
-		public void RegisterInstance<T>(object instance) 
+		public void RegisterInstance<T>(object instance)
 		{
 			// instances are initializing externally and have no container events responders
 			var type = typeof(T);
-			if (_singletons.Contains(type))
+			if(_singletons.Contains(type))
 				throw new ArgumentException("registered already");
 			_singletons.Add(type, instance);
 		}
@@ -62,7 +62,7 @@ namespace ThreeInLine.Services.Container
 		/// <summary>
 		/// [Depreciated] Use with caution, because it makes non-obvious context. 
 		/// </summary>
-			public void RegisterProvider<T>(object provider)
+		public void RegisterProvider<T>(object provider)
 		{
 			var type = typeof(T);
 			if(_providers.Contains(type))

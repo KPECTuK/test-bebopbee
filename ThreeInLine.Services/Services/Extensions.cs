@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Text;
+using ThreeInLine.Services.Logging;
 using UnityEngine;
 
 namespace ThreeInLine.Services
@@ -31,6 +33,18 @@ namespace ThreeInLine.Services
 			}
 			builder.Append("-- .end exceptions trace");
 			return builder.ToString();
+		}
+		
+		[Conditional("DEBUG")]
+		public static void Log(this object @object, Level level, string message)
+		{
+			Container.Container.CompositionRoot.Resolve<ILog>().Log(@object.GetType(), level, message);
+		}
+
+		[Conditional("DEBUG")]
+		public static void Log(this object @object, Level level, Exception exception)
+		{
+			Container.Container.CompositionRoot.Resolve<ILog>().Log(@object.GetType(), level, exception);
 		}
 	}
 }

@@ -6,5 +6,7 @@ namespace ThreeInLine.Services.Controllers
 	{
 		int Index { get; }
 		Vector3 Position { get; }
+		void SetState(int player);
+		void SetSize(float normalized);
 	}
 }

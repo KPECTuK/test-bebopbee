@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ThreeInLine.Services.Repository
+namespace ThreeInLine.Services.Logic
 {
 	public struct IntVector
 	{

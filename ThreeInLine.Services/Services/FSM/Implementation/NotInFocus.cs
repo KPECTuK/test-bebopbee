@@ -1,6 +1,5 @@
 using ThreeInLine.Services.Container;
 using ThreeInLine.Services.Interaction;
-using ThreeInLine.Services.Logging;
 
 namespace ThreeInLine.Services.FSM.Implementation
 {
@@ -13,9 +12,10 @@ namespace ThreeInLine.Services.FSM.Implementation
 			_focusing = Container.Resolve<IFocusing>();
 		}
 
+		public override void ResetState() { }
+
 		public override bool Rising()
 		{
-			Container.Resolve<ILog>().Log(GetType(), Level.Debug, "not in focus RISE");
 			return false;
 		}
 
@@ -26,7 +26,6 @@ namespace ThreeInLine.Services.FSM.Implementation
 
 		public override bool Fading()
 		{
-			Container.Resolve<ILog>().Log(GetType(), Level.Debug, "not in focus FADE");
 			return false;
 		}
 	}

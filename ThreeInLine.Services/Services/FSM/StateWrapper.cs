@@ -14,10 +14,18 @@ namespace ThreeInLine.Services.FSM
 			_state = state;
 			_executable = new Func<bool>[]
 			{
+				ResetState,
 				_state.Rising,
 				_state.Idle,
 				_state.Fading,
 			};
+		}
+
+		private bool ResetState()
+		{
+			_executing = 0;
+			_state.ResetState();
+			return false;
 		}
 
 		// IEnumerator
@@ -26,11 +34,18 @@ namespace ThreeInLine.Services.FSM
 			if(_executing < _executable.Length && _executable[_executing]())
 				return true;
 			_executing += 1;
-			return _executing < _executable.Length;
+			if(_executing < _executable.Length)
+				return true;
+			Reset();
+			return false;
 		}
 
 		// IEnumerator
-		public void Reset() { }
+		public void Reset()
+		{
+			ResetState();
+		}
+
 		// IEnumerator
 		public object Current => _state;
 	}

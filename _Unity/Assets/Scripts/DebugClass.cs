@@ -14,29 +14,29 @@ public static class Debug
 		public void Log(Type source, Level level, string message)
 		{
 			if(level == Level.Debug)
-				Debug.Log(message);
+				Debug.Log(@"<b><color=#7B7B7BFF>[DEBUG]</color>: </b>" + message);
 			if(level == Level.Notice)
-				Debug.Log(message);
+				Debug.Log(@"<b><color=#117400FF>[NOTICE]</color>: </b>" + message);
 			if(level == Level.Info)
-				Debug.Log(message);
+				Debug.Log(@"<b><color=#00000FF>[INFO]</color>: </b>" + message);
 			if(level == Level.Warn)
-				LogWarning(message);
+				LogWarning(@"<b><color=#E19210FF>[WARN]</color>: </b>" + message);
 			if(level == Level.Error)
-				LogError(message);
+				LogError(@"<b><color=#E10A10FF>[ERROR]</color>: </b>" + message);
 		}
 
 		public void Log(Type source, Level level, Exception exception)
 		{
 			if (level == Level.Debug)
-				Debug.Log(exception.ToText());
+				Debug.Log(@"<b><color=#7B7B7BFF>[DEBUG]</color>: </b>" + exception.ToText());
 			if (level == Level.Notice)
-				Debug.Log(exception.ToText());
+				Debug.Log(@"<b><color=#117400FF>[NOTICE]</color>: </b>" + exception.ToText());
 			if (level == Level.Info)
-				Debug.Log(exception.ToText());
+				Debug.Log(@"<b><color=#00000FF>[INFO]</color>: </b>" + exception.ToText());
 			if (level == Level.Warn)
-				LogWarning(exception.ToText());
+				LogWarning(@"<b><color=#E19210FF>[WARN]</color>: </b>" + exception.ToText());
 			if (level == Level.Error)
-				LogError(exception.ToText());
+				LogError(@"<b><color=#E10A10FF>[ERROR]</color>: </b>" + exception.ToText());
 		}
 	}
 
