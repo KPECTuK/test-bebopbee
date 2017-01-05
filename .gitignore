@@ -35,6 +35,8 @@ TestResult.xml
 _Unity/*.sln
 _Unity/Temp/
 _Unity/Library/
+/Library/
+/Temp/
 
 # Unity tools state
 _Unity/*.xml
