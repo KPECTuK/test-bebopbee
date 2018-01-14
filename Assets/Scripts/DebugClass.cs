@@ -47,7 +47,7 @@ public static class Debug
 
 	public static bool DeveloperConsoleVisible { get { return UnityEngine.Debug.developerConsoleVisible; } set { UnityEngine.Debug.developerConsoleVisible = value; } }
 	public static bool IsDebugBuild { get { return UnityEngine.Debug.isDebugBuild; } }
-	public static ILogger Logger { get { return UnityEngine.Debug.logger; } }
+	public static ILogger Logger { get { return UnityEngine.Debug.unityLogger; } }
 
 	[Conditional("UNITY_ASSERTIONS")]
 	[Conditional("DEBUG")]

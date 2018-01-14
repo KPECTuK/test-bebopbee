@@ -1,4 +1,7 @@
-﻿Shader "ThreeInLine/Test"
+﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "ThreeInLine/Test"
 {
 	SubShader
 	{
@@ -26,8 +29,8 @@
 			v2f vert (appdata v)
 			{
 				v2f o;
-				o.position = mul(UNITY_MATRIX_MVP, v.vertex);
-				o.wNormal = mul((float3x3)_Object2World, v.normal);
+				o.position = UnityObjectToClipPos(v.vertex);
+				o.wNormal = mul((float3x3)unity_ObjectToWorld, v.normal);
 				return o;
 			}
 			

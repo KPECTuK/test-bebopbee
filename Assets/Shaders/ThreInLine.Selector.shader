@@ -1,4 +1,6 @@
-﻿Shader "ThreeInLine/Selector"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "ThreeInLine/Selector"
 {
 	Properties
 	{
@@ -48,7 +50,7 @@
 			v2f vert (appdata v)
 			{
 				v2f o;
-				o.position = mul(UNITY_MATRIX_MVP, float4(v.vertex.x * _Size, v.vertex.y, v.vertex.z * _Size, 1.0));
+				o.position = UnityObjectToClipPos(float4(v.vertex.x * _Size, v.vertex.y, v.vertex.z * _Size, 1.0));
 				return o;
 			}
 			

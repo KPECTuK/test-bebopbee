@@ -27,9 +27,8 @@ bld/
 *.VisualState.xml
 TestResult.xml
 
-#UnityVS
-**/[Uu]nityVS/
-**/UnityVS.meta
+UnityPackageManager/
+.vscode/
 
 # Unity3D
 _Unity/*.sln

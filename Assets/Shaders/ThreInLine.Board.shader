@@ -1,4 +1,6 @@
-﻿Shader "ThreeInLine/Board"
+﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+Shader "ThreeInLine/Board"
 {
 	Properties
 	{
@@ -46,7 +48,7 @@
 			v2f vert (appdata v)
 			{
 				v2f o;
-				o.position = mul(UNITY_MATRIX_MVP, v.vertex);
+				o.position = UnityObjectToClipPos(v.vertex);
 				return o;
 			}
 			
