@@ -1,29 +1,24 @@
+##### Tools
 Unity3D 5.3.5.p8
+Visual Studio 2015
 
-  To run the project u shold open the ThreeInLine.sln and build it.
-It will build the assebly to  $(SlutionDir)_Unity\Externals.  Unity
-project should be runnable then, so you can open it with an Editor.
-Im using x86 Editor now, because of some plugins, that im working
-with currently, but i beleve its not necessuary to use x86 exectly.
+You shold open the ThreeInLine.sln and build it, using Visual Studio, prior to be able to run the project. It will build the assembly to $(SolutionDir)_Unity\Externals. Unity project should be runnable then, so you will be able to open it with the Editor.
 
-After u'll start the application the game will behave (i beleve) as
-described in test topic.
+#####The game will behave like described below:
+- to focus onto the cell: one should click over the cell
+- to set the piece to the empty cell: one should double click over the cell, been focused onto
+- to move one piece: one should swipe from the cell, been focused onto, to the naighboring cell
 
-- to focus onto the cell: click over the cell
-- to set the piece to the empty cell: double click over the cell focused
-- to move one piece: swipe from the cell focused to the naighbor cell
-
-Notes:
-- Input implementation is no good and very inplace, but should be
-enough, because the channels implementaion is very complex for that
+#####Notes:
+- Input implementation is no good and very inplace, but it should be
+enough for this demo, because the channels implementaion is very complex for that
 project
-- There are no restart or winner screen in game, because it makes fsm
-much complex
-- Differed rendering was picked because of intending for many lights
+- There are no restart or winner screen in the game, because it makes fsm
+much more complex
+- Differed rendering was picked as a solution because of intending for many lights
 for that visual style (or maybe not, i dont understand excectly the
 direction of developing)
-- The scene is very flexable, because the model asset can be recreated
-any time by overwriting the .fbx and set the BoardInputControllerComponent
-on the asset root (board node). The naming convenstion is:
-	-- piece_# - # is the index of the piece as described in Logic.Board
-	calss
+- The scene is very flexable. The asset model can be recreated any time by overwriting the .fbx. One must setup the BoardInputControllerComponent on the root (board node). 
+
+#####The naming convenstion is:
+- piece_# - # is the index of the piece as described in Logic.Board calss
